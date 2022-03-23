@@ -1,0 +1,130 @@
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+.app {
+    font-family: "Comic Sans MS" !important;
+    color: snow !important;
+}
+
+body{
+    background: linear-gradient(to right, #005AA7, #FFFDE4) no-repeat center center;
+}
+
+.heading{
+    font-weight: bolder;
+    letter-spacing: -1px;
+    line-height: 1;
+    text-align: center;
+    color: #00396b;
+}
+
+p {
+    color: #444;
+}
+
+/*img{*/
+/*    width:100%;*/
+/*    max-width:300px;*/
+/*}*/
+
+input#file-upload-button {
+    background-color: dimgrey;
+    color: white;
+}
+
+button{
+    background-color: dimgrey;
+    color: white;
+}
+
+button:focus {
+    outline: 0;
+}
+
+.container {
+    margin: 0 auto;
+    text-align: center;
+    opacity:0.9;
+}
+
+.page-description {
+    font-size: 1.1rem;
+    margin: 0 auto;
+}
+
+.tz-link {
+    font-size: 1em;
+    color: #1da7da;
+    text-decoration: none;
+}
+
+.no-browser-support {
+    display: none;
+    font-size: 1.2rem;
+    color: #e64427;
+    margin-top: 35px;
+}
+
+.app {
+    margin: 0px auto;
+    padding-top: 5%;
+    width: 60%;
+}
+
+#recording-instructions {
+    margin: 15px auto 60px;
+}
+
+#notes {
+    padding-top: 20px;
+}
+
+.note .header {
+    font-size: 0.9em;
+    color: #888;
+    margin-bottom: 10px;
+}
+
+.note .delete-note,
+.note .listen-note {
+    text-decoration: none;
+    margin-left: 15px;
+}
+
+.note .content {
+    margin-bottom: 40px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 50px 25px;
+    }
+
+    button {
+        margin-bottom: 10px;
+    }
+
+}
+
+.banner-section img{
+    margin: 5px;
+    height: 200px;
+    width: 275px;
+}
+
+.banner-section{
+    height: 500px;
+    overflow: auto;
+}
+
+/* -- Demo ads -- */
+
+@media (max-width: 1200px) {
+    #bsaHolder{ display:none;}
+}
+
+.input-group-btn{
+    background-color: #1da7da;
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Smart Photo Album</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style-custom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.6.0/bootstrap-tagsinput.min.css"/>
+    <script type="text/javascript" src="sdk/lib/axios/dist/axios.standalone.js"></script>
+    <script type="text/javascript" src="sdk/lib/CryptoJS/rollups/hmac-sha256.js"></script>
+    <script type="text/javascript" src="sdk/lib/CryptoJS/rollups/sha256.js"></script>
+    <script type="text/javascript" src="sdk/lib/CryptoJS/components/hmac.js"></script>
+    <script type="text/javascript" src="sdk/lib/CryptoJS/components/enc-base64.js"></script>
+    <script type="text/javascript" src="sdk/lib/url-template/url-template.js"></script>
+    <script type="text/javascript" src="sdk/lib/apiGatewayCore/sigV4Client.js"></script>
+    <script type="text/javascript" src="sdk/lib/apiGatewayCore/apiGatewayClient.js"></script>
+    <script type="text/javascript" src="sdk/lib/apiGatewayCore/simpleHttpClient.js"></script>
+    <script type="text/javascript" src="sdk/lib/apiGatewayCore/utils.js"></script>
+    <script type="text/javascript" src="sdk/apigClient.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="app">
+
+            <h1 class="heading">Smart Photo Album</h1>
+            <h3 style="margin-top:30px;text-align:center">Upload a new photo</h3>
+            <form class="form-inline" id="upload-form">
+                <div class="form-group">
+                    <input id="file-input" type="file" class="form-control"/>
+                    <input id="label-input" type="text" placeholder="Labels" class="form-control" data-role="tagsinput"/>
+                    <button id="upload-button" type="button" class="btn btn-primary" onclick="uploadPhoto()">
+                       Upload
+                    </button>
+                </div>
+            </form>
+            <h3 style="margin-top:30px;text-align:center;color: #337ab7">OR</h3>
+            <h3 style="text-align:center">Search photos</h3>
+            <form class="form-inline" id="search-form">
+                <div class="form-group">
+                    <input id="search-input" type="search" class="form-control" placeholder="Search"/>
+                    <button id="voice-button" type="button" class="btn btn-primary" onclick="runSpeechRecognition()">
+                        <i class="fa fa-microphone"></i>
+                    </button>
+                    <button id="search-button" type="button" class="btn btn-primary" onclick="searchPhoto()">
+                        <i class="fa fa-search"></i>
+                    </button>  &nbsp; <span id="action"></span>
+                </div>
+            </form>
+        </div>
+        <div></div>
+        <p id="uploadText"></p>
+        <div class="banner-section">
+            <p id="displaytext"></p>
+            <div id="img-container">
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="modalContainer" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="modalMsg"></h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.6.0/bootstrap-tagsinput.min.js"></script>
+    <script src="script.js"></script>
+    <script src="render.js"></script>
+    <script src="sdk/apigClient.js"></script>
+</body>
+
+</html>
