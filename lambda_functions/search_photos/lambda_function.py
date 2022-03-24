@@ -5,6 +5,8 @@ import datetime
 
 import urllib3
 
+#Added Commit to file
+
 host = 'https://search-photos-7wewgttbjdvjbjycqxxhyioyli.us-west-2.es.amazonaws.com'
 index = 'photos'
 type = 'photo'
