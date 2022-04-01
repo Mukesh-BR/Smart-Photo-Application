@@ -4,7 +4,7 @@ import boto3
 import datetime
 import urllib3
 
-
+#Adding Comment for Demo
 rekognition = boto3.client('rekognition')
 
 host = 'https://search-photos-7wewgttbjdvjbjycqxxhyioyli.us-west-2.es.amazonaws.com'
