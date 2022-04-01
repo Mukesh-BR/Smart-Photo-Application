@@ -4,7 +4,7 @@ import boto3
 import datetime
 import urllib3
 
-#Making a change to lambda
+
 rekognition = boto3.client('rekognition')
 
 host = 'https://search-photos-7wewgttbjdvjbjycqxxhyioyli.us-west-2.es.amazonaws.com'
@@ -25,13 +25,24 @@ def detect_labels(bucket, key):
         output_tags.append(label['Name'])
     return output_tags
 
+def get_s3_metadata(bucket, file):
+    print("Get custom labels for %s - %s" % (bucket, file))
+    s3 = boto3.client("s3", region_name='us-east-1')
+    response = s3.head_object(Bucket=bucket, Key=file)
+    print("S3 head obj:", response)
+    custom_labels = response["Metadata"].get("customlabels", "")
+    custom_labels = list(filter(lambda x: x, map(lambda x: x.strip(), custom_labels.split(","))))
+    print("Custom labels:", custom_labels)
+    return custom_labels
 
 
 def lambda_handler(event, context):
+    print(event)
     bucket = event['Records'][0]['s3']['bucket']['name']
     key = urllib.parse.unquote_plus(event['Records'][0]['s3']['object']['key'])
     tags = detect_labels(bucket, key)
-    
+    custom =  get_s3_metadata(bucket, key)
+    tags = tags+custom
     opensearch_js = {"objectKey": key, 
                     "bucket": bucket,
                     "createdTimestamp": str(datetime.datetime.now().strftime("%Y-%m-%d"'T'"%H:%M:%S")),
