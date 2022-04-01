@@ -5,26 +5,19 @@ import datetime
 
 import urllib3
 
-#Added Commit to file
+HOST = 'https://search-photos-7wewgttbjdvjbjycqxxhyioyli.us-west-2.es.amazonaws.com'
+USERNAME= "ccbd"
+PASSWORD= "Ccbd@1234"
 
-host = 'https://search-photos-7wewgttbjdvjbjycqxxhyioyli.us-west-2.es.amazonaws.com'
-index = 'photos'
-type = 'photo'
-master_username= "ccbd"
-master_password= "Ccbd@1234"
-headers = { "Content-Type": "application/json" }
+INDEX = 'photos'
+INDEX_TYPE = 'photo'
 
-
+LEX_CLIENT = boto3.client('lex-runtime')
 
 def lambda_handler(event, context):
-    # TODO implement
-    print(event,context)
     print("query: " + str(event["queryStringParameters"]["q"]))
     
-    client = boto3.client('lex-runtime')
-    # print('botName: ','myphotosbot','botAlias:','ProdAlias','userId:','BPMOLRVQSF','inputText:',event["queryStringParameters"]["q"])
-        
-    response = client.post_text(
+    response = LEX_CLIENT.post_text(
         botName='myphotosbot',
         botAlias='Dev',
         userId='BPMOLRVQSF',
@@ -43,16 +36,23 @@ def lambda_handler(event, context):
     print(response["slots"])
     
     http = urllib3.PoolManager()
-    url = "%s/%s/%s/_search?" % (host, index,type)
-    headers = urllib3.make_headers(basic_auth='%s:%s' % (master_username, master_password))
+    url = "%s/%s/%s/_search?" % (HOST, INDEX, INDEX_TYPE)
+    headers = urllib3.make_headers(basic_auth='%s:%s' % (USERNAME, PASSWORD))
     headers.update({
         'Content-Type': 'application/json',
         "Accept": "application/json"
     })
+    
+    word1 = response['slots']['first_keyword']
+    word2 = response['slots']['second_keyword']
+    if word1[-1] == 's' and not word1[-2] == 's':
+        word1 = word1[:-1]
+    if word2 is not None and word2[-1] == 's' and not word2[-2] == 's':
+        word2 = word2[:-1]
     query = {
               "query": {
                   "query_string": {
-                        "query": f"(labels:{response['slots']['first_keyword']} OR labels:{response['slots']['second_keyword']})"
+                        "query": f"(labels:{word1} OR labels:{word2})"
                     }
                 }
             }
